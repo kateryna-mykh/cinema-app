@@ -16,6 +16,12 @@ public abstract class AbstractTest {
     private static final String USERNAME = "DAOTestRunner";
     private static final String PASSWORD = "";
     private static final String DB_STRATEGY = "create-drop";
+    protected String MOVIE_TITLE = "Mavka. The Forest Song";
+    protected Long TEST_ID = 1L;
+    protected String TEST_EMAIL = "test-mail@i.ua";
+    protected String TEST_PASSWORD = "1234";
+    protected String CINEMA_HALL_DESCR = "Multiplex";
+    protected int CINEMA_HALL_CAPACITY = 200;
     
     protected interface DataSourceProvider {
         enum IdentifierStrategy {
