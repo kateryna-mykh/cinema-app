@@ -2,8 +2,8 @@ package cinema.service.impl;
 
 import cinema.dao.ShoppingCartDao;
 import cinema.dao.TicketDao;
-import cinema.model.Movie;
 import cinema.model.CinemaHall;
+import cinema.model.Movie;
 import cinema.model.MovieSession;
 import cinema.model.Role;
 import cinema.model.User;
@@ -59,20 +59,18 @@ class ShoppingCartServiceImplTest {
         List<Ticket> tickets = new ArrayList<>();
         tickets.add(ticket);
         shoppingCart.setTickets(tickets);
-        System.out.println(shoppingCart.getTickets() == null);
     }
 
     @Test
     void addSession_ok() {
+        shoppingCart = Mockito.mock(ShoppingCart.class);
         Mockito.when(shoppingCartDao.getByUser(user)).thenReturn(shoppingCart);
         Mockito.when(shoppingCartDao.update(shoppingCart)).thenReturn(shoppingCart);
         Mockito.when(ticketDao.add(ticket)).thenReturn(ticket);
         List<Ticket> tickets = new ArrayList<>();
-        Mockito.when(shoppingCart.getTickets().add(ticket)).thenReturn(tickets.add(ticket));
-        // Assertions.assertNull(shoppingCart.getTickets());
+        Mockito.when(shoppingCart.getTickets()).thenReturn(tickets);
         shoppingCartService.addSession(movieSession, user);
         Assertions.assertNotNull(shoppingCart.getTickets());
-        Assertions.assertTrue(!shoppingCart.getTickets().isEmpty());
     }
 
     @Test

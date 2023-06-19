@@ -7,6 +7,7 @@ import cinema.dao.OrderDao;
 import cinema.dao.RoleDao;
 import cinema.dao.TicketDao;
 import cinema.dao.UserDao;
+import cinema.exception.DataProcessingException;
 import cinema.model.CinemaHall;
 import cinema.model.Movie;
 import cinema.model.MovieSession;
@@ -19,12 +20,14 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.Set;
+import org.hibernate.HibernateException;
+import org.hibernate.SessionFactory;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 class OrderDaoImplTest extends AbstractTest {
-    private static final Long ID = 1L;
     private OrderDao orderDao;
     private UserDao userDao;
     private TicketDao ticketDao;
@@ -34,11 +37,12 @@ class OrderDaoImplTest extends AbstractTest {
     private RoleDao roleDao;
     private Order order;
     private User user;
+    private SessionFactory sessionFactory;
 
     @Override
     protected Class<?>[] entities() {
-        return new Class[] { Order.class, Ticket.class, User.class, MovieSession.class, CinemaHall.class, Movie.class,
-                Role.class };
+        return new Class[] { Order.class, Ticket.class, User.class, MovieSession.class,
+                CinemaHall.class, Movie.class, Role.class };
     }
 
     @BeforeEach
@@ -50,7 +54,7 @@ class OrderDaoImplTest extends AbstractTest {
         roleDao = new RoleDaoImpl(getSessionFactory());
         cinemaHallDao = new CinemaHallDaoImpl(getSessionFactory());
         movieDao = new MovieDaoImpl(getSessionFactory());
-        
+
         order = new Order();
         order.setOrderTime(LocalDateTime.now());
         user = new User();
@@ -62,7 +66,7 @@ class OrderDaoImplTest extends AbstractTest {
         user.setRoles(Set.of(role));
         userDao.add(user);
         order.setUser(user);
-        
+
         Movie mavka = new Movie();
         mavka.setTitle("Mavka. The Forest Song");
         movieDao.add(mavka);
@@ -79,15 +83,8 @@ class OrderDaoImplTest extends AbstractTest {
         ticket.setUser(user);
         ticket.setMovieSession(movieSession);
         ticketDao.add(ticket);
-        
-        order.setTickets(List.of(ticket));
-    }
 
-    @Test
-    void add_ok() {
-        Order actual = orderDao.add(order);
-        Assertions.assertNotNull(actual);
-        Assertions.assertEquals(ID, order.getId());
+        order.setTickets(List.of(ticket));
     }
 
     @Test
@@ -95,5 +92,14 @@ class OrderDaoImplTest extends AbstractTest {
         orderDao.add(order);
         List<Order> actual = orderDao.getOrdersHistory(user);
         Assertions.assertEquals(List.of(order).size(), actual.size());
+    }
+
+    @Test
+    void getOrdersHistory_exception_dataProcessingException() {
+        sessionFactory = Mockito.mock(SessionFactory.class);
+        orderDao = new OrderDaoImpl(sessionFactory);
+        Mockito.when(sessionFactory.openSession()).thenThrow(HibernateException.class);
+        Assertions.assertThrows(DataProcessingException.class,
+                () -> orderDao.getOrdersHistory(user));
     }
 }

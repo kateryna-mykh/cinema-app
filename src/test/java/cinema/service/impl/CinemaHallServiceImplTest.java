@@ -12,7 +12,7 @@ import org.mockito.Mockito;
 
 class CinemaHallServiceImplTest {
     private static final String DESCRIPTION = "Multiplex";
-    private static final int CAPACITY = 150;
+    private static final int CAPACITY = 200;
     private static final Long VALID_ID = 1L;
     private static final Long INVALID_ID = 0L;
     private static CinemaHallService cinemaHallService;
