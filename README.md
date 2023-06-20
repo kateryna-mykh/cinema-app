@@ -6,7 +6,7 @@ The project follows REST principles implemented with HTTP methods.
 There implemented 2 types of roles: "User" and "Admin" have different access to controllers.
 
 Functionality:
-* login as user or register (for last need to use Postman)
+* login as user or register
 * create and find movies and cinema halls
 * create, find and update available movie sessions
 * add tickets to movie-session to shopping cart
