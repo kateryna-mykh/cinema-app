@@ -28,7 +28,7 @@ The project is based on 3-layer architecture:
 * Hibernate 5.6.14.Final
 * MySQL 8.0.22
 * Apache Tomcat 9.0
-* Tests: (spring-test 5.3.7, mockito-core 5.3.1, hsqldb 2.7.2):  
+* Tests: (spring-test 5.3.7, mockito-core 5.3.1, hsqldb 2.7.2)  
 All coverage 71.4% (tested DAO and service layers - 100%) 
 
 ## Installation and Launch
