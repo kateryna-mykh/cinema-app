@@ -29,7 +29,7 @@ The project is based on 3-layer architecture:
 * MySQL 8.0.22
 * Apache Tomcat 9.0
 * Tests: (spring-test 5.3.7, mockito-core 5.3.1, hsqldb 2.7.2):  
-All coverage 64.8%, tested DAO and service layers - 100%) 
+All coverage 71.4% (tested DAO and service layers - 100%) 
 
 ## Installation and Launch
 You need to install [JDK](https://www.oracle.com/cis/java/technologies/downloads/), [MySQL](https://dev.mysql.com/downloads/installer/), [Tomcat](https://tomcat.apache.org/download-90.cgi), [Postman desktop version](https://www.postman.com/downloads/), IDE with Java support.
