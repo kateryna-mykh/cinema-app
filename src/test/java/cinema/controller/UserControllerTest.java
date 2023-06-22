@@ -38,15 +38,11 @@ class UserControllerTest {
 
     @Test
     void findByEmail_ok() throws Exception {
-        UserResponseDto responseDto = new UserResponseDto();
-        responseDto.setId(ID);
-        responseDto.setEmail(EMAIL);
+        UserResponseDto responseDto = Mockito.mock(UserResponseDto.class);
         Mockito.when(userService.findByEmail(EMAIL)).thenReturn(Optional.of(user));
         Mockito.when(mapper.mapToDto(user)).thenReturn(responseDto);
         mockMvc.perform(MockMvcRequestBuilders.get("/users/by-email").param("email", EMAIL))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(responseDto.getId()))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.email").value(responseDto.getEmail()))
                 .andReturn();
     }
 

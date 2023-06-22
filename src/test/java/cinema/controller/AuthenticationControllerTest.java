@@ -8,6 +8,7 @@ import cinema.service.mapper.UserMapper;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import org.springframework.http.MediaType;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -25,7 +26,7 @@ class AuthenticationControllerTest {
     private static UserRequestDto requestDto;
 
     @BeforeAll
-    static void setUpBeforeClass() throws Exception {
+    static void setUpBeforeClass() {
         authService = Mockito.mock(AuthenticationService.class);
         requestDto = new UserRequestDto();
         ReflectionTestUtils.setField(requestDto, "email", EMAIL);
@@ -49,11 +50,12 @@ class AuthenticationControllerTest {
                 .thenReturn(user);
         Mockito.when(mapper.mapToDto(user)).thenReturn(responseDto);
         mockMvc.perform(
-                MockMvcRequestBuilders.post("/register").requestAttr("requestDto", requestDto))
+                MockMvcRequestBuilders.post("/register").contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"email\": \"" + EMAIL + "\", \"password\":\"" + PASSWORD
+                                + "\", \"repeatPassword\":\"" + PASSWORD + "\"}"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(responseDto.getId()))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.email").value(responseDto.getEmail()))
                 .andReturn();
-        // .andExpect(MockMvcResultMatchers.status().isOk());
     }
 }
