@@ -1,14 +1,14 @@
-###Postamn example requests for cinema-app
+##### Postamn example requests for cinema-app
 
 GET: http://localhost:8080/cinema-app/login  
 Choose 'Authorization' Type: Basic Auth then login with 'Admin' credentials in 'Usage Example'.  
 
-Add some movies, cinema halls and movie-sessions:  
+Add some movies, cinema halls and movie sessions:  
 (choose 'Body' raw JSON)  
 POST: http://localhost:8080/cinema-app/movies
 
 ```java
-{"title": "The Little Marmaid, 2023", "description": "The Little Mermaid is a 2023 American musical fantasy film directed by Rob Marshall"}
+{"title": "The Little Mermaid, 2023", "description": "The Little Mermaid is a 2023 American musical fantasy film directed by Rob Marshall"}
 {"title": "Mavka. The Forest Song", "description": "Mavka. The Forest Song is a 2023 Ukrainian computer-animated fantasy comedy-drama film directed by Oleh Malamuzh and Oleksandra Ruban. Based on the poetic play The Forest Song by poet Lesya Ukrainka."}
 ```
 POST: http://localhost:8080/cinema-app/cinema-halls
@@ -34,13 +34,13 @@ PUT: http://localhost:8080/cinema-app/movie-sessions/{id}
 DELETE: http://localhost:8080/cinema-app/movie-sessions/{id}  
 GET: http://localhost:8080/cinema-app/users/by-email/?email={email}
 
-Let's add new user type 'User':
+Let's add a new user type 'User':
 POST: http://localhost:8080/cinema-app/register
 
 ```java
 {"email":"your_email@domain","password":"your_password","repeatPassword":"your_password"}
 ```
-All users can get list of available movies, cinema-halls and sessions:  
+All users can get a list of available movies, cinema halls and sessions:  
 GET: http://localhost:8080/cinema-app/movies  
 GET: http://localhost:8080/cinema-app/cinema-halls  
 GET: http://localhost:8080/cinema-app/movie-sessions/available?movieId={id}&date={dd.MM.yyyy}  
