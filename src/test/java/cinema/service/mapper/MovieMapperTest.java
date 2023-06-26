@@ -20,7 +20,7 @@ class MovieMapperTest {
         movie.setTitle("Mavka. The Forest Song");
         movie.setId(1L);
         dto = new MovieRequestDto();
-        ReflectionTestUtils.setField(dto, "title", "The Little Marmaid");
+        ReflectionTestUtils.setField(dto, "title", "The Little Mermaid");
         ReflectionTestUtils.setField(dto, "description", "2023");
     }
 

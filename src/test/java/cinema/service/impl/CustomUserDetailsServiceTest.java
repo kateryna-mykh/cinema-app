@@ -13,7 +13,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 class CustomUserDetailsServiceTest {
-    private static final String VALID_EMAIL = "bob@i.ua";
+    private static final String VALID_EMAIL = "test-mail@i.ua";
     private static final String INVALID_EMAIL = "alice@i.ua";
     private static final String PASSWORD = "1234";
     private static CustomUserDetailsService userDetailsService;

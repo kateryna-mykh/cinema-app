@@ -40,7 +40,7 @@ class MovieControllerTest {
         Mockito.when(movieService.add(movie)).thenReturn(movie);
         mockMvc.perform(MockMvcRequestBuilders.post("/movies")
                 .contentType(MediaType.APPLICATION_JSON).content(
-                        "{\"title\":\"The Little Marmaid, 2023\", \"description\":\"The Little Mermaid is a 2023 American musical fantasy film directed by Rob Marshall\"}"))
+                        "{\"title\":\"The Little Mermaid, 2023\", \"description\":\"The Little Mermaid is a 2023 American musical fantasy film directed by Rob Marshall\"}"))
                 .andExpect(MockMvcResultMatchers.status().isOk()).andReturn();
     }
 

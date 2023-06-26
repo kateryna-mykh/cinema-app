@@ -58,8 +58,8 @@ class OrderDaoImplTest extends AbstractTest {
         order = new Order();
         order.setOrderTime(LocalDateTime.now());
         user = new User();
-        user.setEmail("test-mail@i.ua");
-        user.setPassword("1234");
+        user.setEmail(TEST_EMAIL);
+        user.setPassword(TEST_PASSWORD);
         Role role = new Role();
         role.setRoleName(Role.RoleName.USER);
         roleDao.add(role);
@@ -68,10 +68,10 @@ class OrderDaoImplTest extends AbstractTest {
         order.setUser(user);
 
         Movie mavka = new Movie();
-        mavka.setTitle("Mavka. The Forest Song");
+        mavka.setTitle(MOVIE_TITLE);
         movieDao.add(mavka);
         CinemaHall multiplex = new CinemaHall();
-        multiplex.setDescription("Multiplex");
+        multiplex.setDescription(CINEMA_HALL_DESCR);
         multiplex.setCapacity(150);
         cinemaHallDao.add(multiplex);
         MovieSession movieSession = new MovieSession();
